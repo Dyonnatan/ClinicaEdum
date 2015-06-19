@@ -17,7 +17,7 @@ public class GenericDAO<T> implements Serializable{
 	
 	@Inject
 	private EntityManager manager;
-	
+	//comentario de teste
 	public T buscarPeloCodigo(Long codigo) {
 		//ainda não sei se isso funciona = GenericDAO.class
 		return (T) manager.find(GenericDAO.class, codigo);
