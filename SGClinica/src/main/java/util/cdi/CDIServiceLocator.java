@@ -19,6 +19,7 @@ public class CDIServiceLocator {
 		}
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(Class<T> clazz) {
 		BeanManager bm = getBeanManager();

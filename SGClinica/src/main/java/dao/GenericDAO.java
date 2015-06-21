@@ -9,37 +9,41 @@ import javax.persistence.PersistenceException;
 
 import service.NegocioException;
 import util.jpa.Transactional;
-import model.BancoDeDados;;
+import model.TabelaBD;
+import model.Cliente;
 
-public class GenericDAO<T> implements Serializable{
-	
+public class GenericDAO<T> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private EntityManager manager;
-	//comentario de teste
-	public T buscarPeloCodigo(Long codigo) {
-		//ainda não sei se isso funciona = GenericDAO.class
-		return (T) manager.find(GenericDAO.class, codigo);
+
+	// comentario de teste
+	public T buscarPeloCodigo(Class<T> classe, Long codigo) {
+		// ainda não sei se isso funciona = GenericDAO.class
+		return ((T) manager.find(classe, codigo));
 	}
-	
+
 	public void salvar(T obj) {
 		manager.merge(obj);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> buscarTodos() {
-		return manager.createQuery("from "+this.getClass().getSimpleName()).getResultList();
+	public List<T> buscarTodos(Class<T> classe) {
+		return manager.createQuery("from " + classe.getSimpleName())
+				.getResultList();
 	}
-	
+
 	@Transactional
-	public void excluir(T obj) throws NegocioException {
-		obj = buscarPeloCodigo(((BancoDeDados)obj).getId());
+	public void excluir(Class<T> classe, T obj) throws NegocioException {
+		obj = buscarPeloCodigo(classe, ((TabelaBD) obj).getId());
 		try {
 			manager.remove(obj);
 			manager.flush();
 		} catch (PersistenceException e) {
-			throw new NegocioException(this.getClass().getSimpleName()+" não pode ser excluído.");
+			throw new NegocioException(this.getClass().getSimpleName()
+					+ " não pode ser excluído.");
 		}
 	}
 }

@@ -16,7 +16,6 @@
 
 		<h:form id="frmCadastro">
 			<p:messages id="messages" autoUpdate="true" closable="true" />
-
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Salvar" id="botaoSalvar"
@@ -26,17 +25,49 @@
 					<p:button value="Pesquisa" outcome="/cliente/PesquisaCliente.xhtml" />
 				</p:toolbarGroup>
 			</p:toolbar>
-
 			<p:panelGrid columns="2" id="painel" style="width: 100%"
 				columnClasses="rotulo, campo">
-				<p:outputLabel value="Código" for="codigo" />
-				<p:inputText id="codigo" size="20" maxlength="20"
+				<p:outputLabel value="Id: " for="id" />
+				<p:inputText id="id" size="20" maxlength="20"
 					value="#{cadastroClienteBean.cliente.id}" readonly="true" />
 
-				<p:outputLabel value="Nome" for="nome" />
+				<p:outputLabel value="Nome: " for="nome" />
 				<p:inputText id="nome" size="20" maxlength="20"
 					value="#{cadastroClienteBean.cliente.nome}" />
 
+				<p:outputLabel value="Sexo: " for="sexo" />
+				<p:selectOneMenu id="sexo"
+					value="#{cadastroClienteBean.cliente.sexo}">
+					<f:selectItem itemLabel="Selecione o sexo" />
+					<f:selectItems value="#{cadastroClienteBean.sexos}" var="sexo"
+						itemLabel="#{sexo}" itemValue="#{sexo}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Cpf: " for="cpf" />
+				<p:inputText id="cpf" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.cpf}" />
+
+				<p:outputLabel value="Rg: " for="rg" />
+				<p:inputText id="rg" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.rg}" />
+				<p:outputLabel value="Orgao: " for="orgao" />
+				<p:inputText id="orgao" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.orgao}" />
+
+				<p:outputLabel value="Data Nascimento: " for="dataNascimento" />
+				<p:calendar id="dataNascimento" size="20" pages="3"
+					value="#{cadastroClienteBean.cliente.dataNascimento}"
+					pattern="dd/MM/yyyy" />
+
+				<p:outputLabel value="Municipio: " for="municipio" />
+				<p:inputText id="municipio" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.municipio}" />
+				<p:outputLabel value="Endereco: " for="endereco" />
+				<p:inputText id="endereco" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.endereco}" />
+				<p:outputLabel value="Limite: " for="limite" />
+				<p:inputText id="limite" size="20" maxlength="20"
+					value="#{cadastroClienteBean.cliente.limite}" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

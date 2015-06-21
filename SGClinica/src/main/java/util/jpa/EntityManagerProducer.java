@@ -14,7 +14,7 @@ public class EntityManagerProducer {
 	private EntityManagerFactory factory;
 
 	public EntityManagerProducer() {
-		this.factory = Persistence.createEntityManagerFactory("edum");
+		this.factory = Persistence.createEntityManagerFactory("edumPU");
 	}
 
 	@Produces
