@@ -2,12 +2,11 @@ package model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-//@Table(name="cliente")
-@DiscriminatorValue("C")
+@Table(name="clientes")
 public class Cliente extends Pessoa {
 
 	private BigDecimal limite;

@@ -6,9 +6,9 @@ public class MainGerador {
  public static void main(String[] args) {
 	 String classe = JOptionPane.showInputDialog("Classe");
 	 
-	GeradorCadastro g = null;
+	GeradorXHTML g = null;
 	try {
-		g = new GeradorCadastro(Class.forName(classe));
+		g = new GeradorXHTML(Class.forName(classe));
 	} catch (ClassNotFoundException e) {
 	}
 	if(g!=null){

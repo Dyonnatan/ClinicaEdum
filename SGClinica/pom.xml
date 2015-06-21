@@ -86,6 +86,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.0.CR1</version>
+			<scope>compile</scope>
 		</dependency>
 
 	</dependencies>

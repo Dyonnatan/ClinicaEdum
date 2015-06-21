@@ -6,11 +6,11 @@ import java.awt.datatransfer.StringSelection;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class GeradorCadastro {
+public class GeradorXHTML {
 
 	Class<?> classe;
 
-	public GeradorCadastro(Class<?> classe) {
+	public GeradorXHTML(Class<?> classe) {
 		this.classe = classe;
 	}
 

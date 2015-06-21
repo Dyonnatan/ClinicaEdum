@@ -2,11 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-import javax.annotation.Nonnull;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -14,34 +10,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
-@Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo_pessoa", discriminatorType=DiscriminatorType.STRING, length=3)
+import org.hibernate.validator.constraints.NotBlank;
+
+@MappedSuperclass
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa implements TabelaBD{
 
-	private long id;
+	private Long id;
 	private String nome, cpf, rg, orgao, municipio, endereco;
 	private Sexo sexo;
 	private Calendar dataNascimento;
 //	private LinkedList<Long> telefones;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Override
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	@Override
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	@Nonnull
+	@NotBlank @Size(max=20)
 	@Column(nullable=false,length=25)
 	public String getNome() {
 		return nome;
@@ -49,6 +45,7 @@ public abstract class Pessoa implements TabelaBD{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	@Enumerated(EnumType.ORDINAL)
 	public Sexo getSexo() {
 		return sexo;
@@ -56,6 +53,7 @@ public abstract class Pessoa implements TabelaBD{
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
+	@NotBlank @Size(max=20) 
 	@Column(unique=true,nullable=false,length=20)
 	public String getCpf() {
 		return cpf;
@@ -63,6 +61,7 @@ public abstract class Pessoa implements TabelaBD{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	@Size(max=20)
 	@Column(unique=true,length=12)
 	public String getRg() {
 		return rg;
@@ -70,6 +69,7 @@ public abstract class Pessoa implements TabelaBD{
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
+	@Size(max=6)
 	@Column(length=6)
 	public String getOrgao() {
 		return orgao;

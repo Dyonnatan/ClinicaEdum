@@ -28,11 +28,11 @@
 			<p:panelGrid columns="2" id="painel" style="width: 100%"
 				columnClasses="rotulo, campo">
 				<p:outputLabel value="Id: " for="id" />
-				<p:inputText id="id" size="20" maxlength="20"
+				<p:inputText id="id" size="10" maxlength="20"
 					value="#{cadastroClienteBean.cliente.id}" readonly="true" />
 
 				<p:outputLabel value="Nome: " for="nome" />
-				<p:inputText id="nome" size="20" maxlength="20"
+				<p:inputText id="nome" size="20" maxlength="25"
 					value="#{cadastroClienteBean.cliente.nome}" />
 
 				<p:outputLabel value="Sexo: " for="sexo" />
@@ -48,7 +48,7 @@
 					value="#{cadastroClienteBean.cliente.cpf}" />
 
 				<p:outputLabel value="Rg: " for="rg" />
-				<p:inputText id="rg" size="20" maxlength="20"
+				<p:inputText id="rg" size="20" maxlength="12"
 					value="#{cadastroClienteBean.cliente.rg}" />
 				<p:outputLabel value="Orgao: " for="orgao" />
 				<p:inputText id="orgao" size="20" maxlength="20"
@@ -60,10 +60,10 @@
 					pattern="dd/MM/yyyy" />
 
 				<p:outputLabel value="Municipio: " for="municipio" />
-				<p:inputText id="municipio" size="20" maxlength="20"
+				<p:inputText id="municipio" size="30" maxlength="40"
 					value="#{cadastroClienteBean.cliente.municipio}" />
 				<p:outputLabel value="Endereco: " for="endereco" />
-				<p:inputText id="endereco" size="20" maxlength="20"
+				<p:inputText id="endereco" size="60" maxlength="60"
 					value="#{cadastroClienteBean.cliente.endereco}" />
 				<p:outputLabel value="Limite: " for="limite" />
 				<p:inputText id="limite" size="20" maxlength="20"
