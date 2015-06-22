@@ -9,23 +9,23 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import model.Cliente;
+import model.Medico;
 import model.Sexo;
-import service.CadastroClienteService;
+import service.CadastroMedicoService;
 import service.NegocioException;
 import util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
-public class CadastroClienteBean implements Serializable{
+public class CadastroMedicoBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Cliente cliente;
+	private Medico medico;
 	private List<Sexo> sexos;
-//	private List<Long> telefones;
+//	private LinkedList<Long> telefones;
 	@Inject
-	private CadastroClienteService cadastroClienteService;
+	private CadastroMedicoService cadastroMedicoService;
 
 	@PostConstruct
 	public void init() {
@@ -35,8 +35,8 @@ public class CadastroClienteBean implements Serializable{
 	
 	public void salvar() {
 		try {
-			this.cadastroClienteService.salvar(cliente);
-			FacesUtil.addSuccessMessage("Cliente salvo com sucesso!");
+			this.cadastroMedicoService.salvar(medico);
+			FacesUtil.addSuccessMessage("Médico salvo com sucesso!");
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
 		} catch (Exception e) {
@@ -48,16 +48,15 @@ public class CadastroClienteBean implements Serializable{
 	}
 	
 	public void limpar() {
-		this.cliente = new Cliente();	
+		this.medico = new Medico();		
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Medico getMedico() {
+		return medico;
 	}
 	
-	public void setCliente(Cliente cliente) {
-		System.out.println(cliente);
-		this.cliente = cliente;
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
 	
 	public List<Sexo> getSexos() {

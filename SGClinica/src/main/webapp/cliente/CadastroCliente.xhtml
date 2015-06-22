@@ -35,10 +35,9 @@
 				<p:inputText id="nome" size="20" maxlength="25"
 					value="#{cadastroClienteBean.cliente.nome}" />
 
-				<p:outputLabel value="Sexo: " for="sexo" />
-				<p:selectOneMenu id="sexo"
-					value="#{cadastroClienteBean.cliente.sexo}">
-					<f:selectItem itemLabel="Selecione o sexo" />
+				<p:outputLabel value="Sexo: " for="sexoId" />
+				<p:selectOneMenu id="sexoId" value="#{cadastroClienteBean.cliente.sexo}">
+					<f:selectItem itemLabel="Selecione o sexo: " />
 					<f:selectItems value="#{cadastroClienteBean.sexos}" var="sexo"
 						itemLabel="#{sexo}" itemValue="#{sexo}" />
 				</p:selectOneMenu>
@@ -55,7 +54,7 @@
 					value="#{cadastroClienteBean.cliente.orgao}" />
 
 				<p:outputLabel value="Data Nascimento: " for="dataNascimento" />
-				<p:calendar id="dataNascimento" size="20" pages="3"
+				<p:calendar id="dataNascimento" size="20"
 					value="#{cadastroClienteBean.cliente.dataNascimento}"
 					pattern="dd/MM/yyyy" />
 

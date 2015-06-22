@@ -1,7 +1,7 @@
 package model;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.Queue;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Consulta implements TabelaBD{
 
 	private Long id;
-	private Queue<Procedimento> procedimentos;
+	private Collection<Procedimento> procedimentos;
 	private Date horario;
 	private Convenio convenio;
 	
@@ -33,12 +33,12 @@ public class Consulta implements TabelaBD{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,targetEntity=Procedimento.class)   
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,targetEntity=Consulta.class)   
 	@JoinColumn(name="id_procedimento") 
-	public Queue<Procedimento> getProcedimentos() {
+	public Collection<Procedimento> getProcedimentos() {
 		return procedimentos;
 	}
-	public void setProcedimentos(Queue<Procedimento> procedimentos) {
+	public void setProcedimentos(Collection<Procedimento> procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 	public Date getHorario() {
@@ -55,6 +55,28 @@ public class Consulta implements TabelaBD{
 	public void setConvenio(Convenio convenio) {
 		this.convenio = convenio;
 	}
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Consulta other = (Consulta) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 	
 }

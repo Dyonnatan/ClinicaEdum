@@ -6,17 +6,17 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import util.cdi.CDIServiceLocator;
+import model.Medico;
 import model.TabelaBD;
-import model.Cliente;
 import dao.GenericDAO;
 
-@FacesConverter(forClass=Cliente.class)
-public class ClienteConverter implements Converter {
+@FacesConverter(forClass=Medico.class)
+public class MedicoConverter implements Converter {
 
-	private GenericDAO<Cliente> genericDAO;
+	private GenericDAO<Medico> genericDAO;
 
-	public ClienteConverter() {
-		this.genericDAO = (GenericDAO<Cliente>) CDIServiceLocator.getBean(GenericDAO.class);
+	public MedicoConverter() {
+		this.genericDAO = (GenericDAO<Medico>) CDIServiceLocator.getBean(GenericDAO.class);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class ClienteConverter implements Converter {
 		Object retorno = null;
 
 		if (value != null) {
-			retorno = this.genericDAO.buscarId(Cliente.class, new Long(value));
+			retorno = this.genericDAO.buscarId(Medico.class, new Long(value));
 		}
 
 		return retorno;

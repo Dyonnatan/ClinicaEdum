@@ -32,7 +32,11 @@ public class Cliente extends Pessoa {
 	@Override
 	public String toString() {
 		return "Cliente [limite=" + limite + ", getNome()=" + getNome()
-				+ ", getCpf()=" + getCpf() + "]";
+				+ ", getSexo()=" + getSexo() + ", getCpf()=" + getCpf()
+				+ ", getRg()=" + getRg() + ", getOrgao()=" + getOrgao()
+				+ ", getDataNascimentoFormat()=" + getDataNascimentoFormat()
+				+ ", getMunicipio()=" + getMunicipio() + ", getEndereco()="
+				+ getEndereco() + "]";
 	}
 	
 }
