@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset="UTF-8";
 
 body {
 	font-size: 12px;
@@ -10,40 +10,52 @@ body {
 header {
 	padding: 5px 0px;
 	margin-bottom: 20px;
-	height: 30px;
-
+	height: 40px;
 	background-color: #545454;
 	color: #fff;
-
 	box-shadow: 0px 2px 2px #ccc;
 }
 
-header > div {
-	margin-left: 8px
+header>div {
+	margin-left: 8px;
 }
 
 #conteudo {
-	padding: 0px 8px
+	padding: 0px 8px;
 }
 
 footer {
 	padding: 0px 8px;
-	margin-bottom: 10px
+	margin-bottom: 10px;
 }
 
 h1 {
 	font-size: 24px;
 	font-weight: 500;
 	padding: 0px;
-	margin: 0px
+	margin: 0px;
+}
+
+#login-dialog {
+	width: 290px;
+	margin: auto;
+	margin-top: 150px;
+}
+
+.grid-login {
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	margin-top: 8px;
+	padding: 10px;
 }
 
 .rotulo {
-	width: 150px
+	width: 150px;
 }
 
 .ui-panelgrid td {
-	height: 34px
+	height:34px;
 }
 
 .ajax-status {
@@ -51,16 +63,11 @@ h1 {
 	top: 55px;
 	right: 10px;
 	width: 35px;
-	height: 35px
+	height: 35px;
 }
 
-.ui-selectmanycheckbox td {
-	border-width: 0px !important;
-	padding: 0px !important;
-}
-
-.ui-selectmanycheckbox td label {
-	padding-right: 10px;
+.convenio-tabela input {
+	width: 356%;
 }
 
 /* Customiza TabView - início */
@@ -86,6 +93,7 @@ h1 {
     border: 0px !important;
     padding: 0px !important;
     background: none !important;
+    margin-top: 6px;
 }
 
 .menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
@@ -93,15 +101,6 @@ h1 {
 }
 
 .menu-sistema .ui-icon-triangle-1-s {
-    background: url(#{resource['imagens:seta-para-baixo.png']}) no-repeat;
+    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat;
 }
 /* Menu sistema fim */
-
-.many-checkbox td {
-	border-width: 0px !important;
-	padding: 0px !important;
-}
-
-.many-checkbox td label {
-	padding-right: 10px;
-}

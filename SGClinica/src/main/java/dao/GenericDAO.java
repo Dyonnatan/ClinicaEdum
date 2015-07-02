@@ -1,11 +1,16 @@
 package dao;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import service.NegocioException;
 import util.jpa.Transactional;
@@ -23,7 +28,9 @@ public class GenericDAO<T> implements Serializable {
 	}
 
 	public void salvar(T obj) {
+
 		manager.merge(obj);
+
 	}
 
 	@SuppressWarnings("unchecked")

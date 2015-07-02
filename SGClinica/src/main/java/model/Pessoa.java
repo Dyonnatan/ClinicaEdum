@@ -32,7 +32,7 @@ public abstract class Pessoa implements TabelaBD{
 	private String nome, cpf, rg, orgao, municipio, endereco;
 	private Sexo sexo;
 	private Date dataNascimento;
-	private List<Long> telefones;
+	private List<String> telefones;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -61,7 +61,7 @@ public abstract class Pessoa implements TabelaBD{
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-	@NotBlank @Size(max=20) 
+	@NotBlank @Size(max=20)
 	@Column(unique=true,nullable=false,length=20)
 	public String getCpf() {
 		return cpf;
@@ -118,12 +118,12 @@ public abstract class Pessoa implements TabelaBD{
 
 	@ElementCollection(targetClass = Long.class,fetch=FetchType.LAZY)
 	@CollectionTable(name="telefones",joinColumns=@JoinColumn(name="id_pessoa"))
-	@Column(name="telefone", length=15,nullable=false)
+	@Column(name="telefone", length=15)
 	@GeneratedValue(generator="id", strategy=GenerationType.IDENTITY)
-	public List<Long> getTelefones() {
+	public List<String> getTelefones() {
 		return telefones;
 	}
-	public void setTelefones(List<Long> telefones) {
+	public void setTelefones(List<String> telefones) {
 		this.telefones = telefones;
 	}
 	@Override

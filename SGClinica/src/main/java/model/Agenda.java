@@ -16,4 +16,28 @@ public class Agenda implements TabelaBD{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public int getDia() {
+		return data.get(Calendar.DATE);
+	}
+	
+	public void setDia(int dia) {
+		data.set(Calendar.DATE, dia);
+	}
+	
+	public int getMes() {
+		return data.get(Calendar.MONTH);
+	}
+	
+	public void setMes(int mes) {
+		data.set(Calendar.MONTH, mes);
+	}
+	
+	public int getAno() {
+		return data.get(Calendar.YEAR);
+	}
+	
+	public void setAno(int ano) {
+		data.set(Calendar.YEAR, ano);
+	}
 }

@@ -15,6 +15,7 @@ public class ClienteConverter implements Converter {
 
 	private GenericDAO<Cliente> genericDAO;
 
+	@SuppressWarnings("unchecked")
 	public ClienteConverter() {
 		this.genericDAO = (GenericDAO<Cliente>) CDIServiceLocator.getBean(GenericDAO.class);
 	}

@@ -1,20 +1,20 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-
-import service.NegocioException;
-import util.jpa.Transactional;
-import model.TabelaBD;
-import model.Cliente;
+//import java.util.List;
+//
+//import javax.inject.Inject;
+//import javax.persistence.EntityManager;
+//import javax.persistence.PersistenceException;
+//
+//import service.NegocioException;
+//import util.jpa.Transactional;
+//import model.TabelaBD;
+//import model.Cliente;
 
 public class ClienteDAO implements Serializable{
-	
-//	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
 //	
 //	@Inject
 //	private EntityManager manager;

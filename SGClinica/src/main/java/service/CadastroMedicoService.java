@@ -12,7 +12,7 @@ public class CadastroMedicoService implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Inject()
+	@Inject
 	private GenericDAO<Medico> medicoDAO;
 	
 	@Transactional

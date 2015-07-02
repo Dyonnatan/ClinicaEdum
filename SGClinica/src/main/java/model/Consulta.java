@@ -13,12 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="consultas")
 public class Consulta implements TabelaBD{
 
 	private Long id;
+	/*Para otimizar a consulta e simplificar o desenvolvimento*/
+	private String nomeCliente;
 	private Collection<Procedimento> procedimentos;
 	private Date horario;
 	private Convenio convenio;
@@ -33,14 +36,22 @@ public class Consulta implements TabelaBD{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,targetEntity=Consulta.class)   
-	@JoinColumn(name="id_procedimento") 
+	@Transient
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,targetEntity=Procedimento.class)   
+	@JoinColumn(name="id_consulta") 
 	public Collection<Procedimento> getProcedimentos() {
 		return procedimentos;
 	}
 	public void setProcedimentos(Collection<Procedimento> procedimentos) {
 		this.procedimentos = procedimentos;
 	}
+	
 	public Date getHorario() {
 		return horario;
 	}

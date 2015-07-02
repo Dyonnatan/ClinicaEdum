@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ForeignKey;
 
@@ -16,23 +18,23 @@ import org.hibernate.annotations.ForeignKey;
 @Table(name = "medicos")
 public class Medico extends Pessoa {
 
-	private Long crm;
+	private Integer crm;
 	private List<Convenio> convenios;
 	private String especialidade;
 
-	@Column(name = "crm", unique = true, nullable = false)
-	public Long getCrm() {
+	@NotNull @Min(value=1)
+	@Column(name = "crm", unique = true, nullable = false, length = 20)
+	public Integer getCrm() {
 		return crm;
 	}
 
-	public void setCrm(Long crm) {
+	public void setCrm(Integer crm) {
 		this.crm = crm;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "medico_convenio", joinColumns = @JoinColumn(name = "id_medico"), inverseJoinColumns = @JoinColumn(name = "id_convenio"))
-	@ForeignKey(name = "fk_med_id",
-    inverseName = "fk_conv_id")
+	@ForeignKey(name = "fk_med_id", inverseName = "fk_conv_id")
 	public List<Convenio> getConvenios() {
 		return convenios;
 	}
@@ -54,7 +56,7 @@ public class Medico extends Pessoa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = (int) (prime * result + crm);
+		result = prime * result + ((crm == null) ? 0 : crm.hashCode());
 		return result;
 	}
 
@@ -67,7 +69,10 @@ public class Medico extends Pessoa {
 		if (getClass() != obj.getClass())
 			return false;
 		Medico other = (Medico) obj;
-		if (crm != other.crm)
+		if (crm == null) {
+			if (other.crm != null)
+				return false;
+		} else if (!crm.equals(other.crm))
 			return false;
 		return true;
 	}

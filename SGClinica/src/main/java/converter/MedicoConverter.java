@@ -15,6 +15,7 @@ public class MedicoConverter implements Converter {
 
 	private GenericDAO<Medico> genericDAO;
 
+	@SuppressWarnings("unchecked")
 	public MedicoConverter() {
 		this.genericDAO = (GenericDAO<Medico>) CDIServiceLocator.getBean(GenericDAO.class);
 	}
