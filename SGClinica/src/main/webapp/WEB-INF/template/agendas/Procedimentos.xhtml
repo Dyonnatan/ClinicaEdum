@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:dataTable id="procedimentosTable"
+			value="#{cadastroConsultaBean.procedimentos}" var="procedimentos">
+			<p:column headerText="Procedimento">
+				<p:autoComplete />
+			</p:column>
+			<p:column headerText="" style="text-align: center">
+				<p:commandButton icon="ui-icon-trash" title="Excluir" />
+			</p:column>
+			<p:columnGroup type="footer">
+				<p:row>
+				</p:row>
+			</p:columnGroup>
+		</p:dataTable>
+
+	</h:form>
+</ui:composition>

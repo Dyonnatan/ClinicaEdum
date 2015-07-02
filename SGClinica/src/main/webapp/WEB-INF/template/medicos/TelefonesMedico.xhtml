@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+
+		<p:outputLabel value="Telefone: " for="idtel" />
+		<p:inputMask mask="(99)9999-9999" id="idtel" size="10" maxlength="10" onchange="submit"
+			value="#{cadastroMedicoBean.telefoneSelecionado}" />
+
+		<p:commandButton icon="ui-icon-plus" title="Inserir"
+			process="#{idtel}" partialSubmit="true" update="tabelatelefone"
+			action="#{cadastroMedicoBean.addTelefone}" />
+
+		<p:dataTable id="tabelatelefone"
+			value="#{cadastroMedicoBean.telefones}" var="telefone">
+
+			<p:column headerText="Telefone">
+				<p:inputMask mask="(99)9999-9999" size="10" maxlength="10"
+					value="#{telefone}" readonly="true" />
+			</p:column>
+			
+			<p:column headerText="" style="text-align: center">
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					process="@this" update="tabelatelefone"
+					action="#{cadastroMedicoBean.removeTelefone}">
+					<f:setPropertyActionListener
+						target="#{cadastroMedicoBean.telefoneSelecionado}"
+						value="#{telefone}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+</ui:composition>

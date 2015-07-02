@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,6 +29,8 @@ public class CadastroMedicoBean implements Serializable {
 	private List<String> telefones;
 	private List<Convenio> convenios;
 	private String telefoneSelecionado;
+	private Convenio convenioSelecionado;
+
 	@Inject
 	private CadastroMedicoService cadastroMedicoService;
 
@@ -51,7 +51,7 @@ public class CadastroMedicoBean implements Serializable {
 			FacesUtil.addErrorMessage(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			FacesUtil
 					.addErrorMessage("Erro desconhecido. Contatar o administrador. ");
 		}
@@ -63,7 +63,6 @@ public class CadastroMedicoBean implements Serializable {
 		telefones = new LinkedList<String>();
 
 		convenios = new LinkedList<Convenio>();
-		convenios.add(new Convenio());
 	}
 
 	public Medico getMedico() {
@@ -81,24 +80,42 @@ public class CadastroMedicoBean implements Serializable {
 	public List<String> getTelefones() {
 		return telefones;
 	}
-	
+
 	public String getTelefoneSelecionado() {
 		return telefoneSelecionado;
 	}
+
 	public void setTelefoneSelecionado(String telefoneSelecionado) {
 		this.telefoneSelecionado = telefoneSelecionado;
 	}
-	public void addTelefone() {
-		
-		this.telefones.add(telefoneSelecionado);
 
+	public void addTelefone() {
+		if(this.telefones.contains(telefoneSelecionado))
+			return;
+		this.telefones.add(telefoneSelecionado);
 	}
 
-public void removeTelefone() {
-	this.telefones.remove(telefoneSelecionado+0L);
-}
+	public void removeTelefone() {
+		this.telefones.remove(telefoneSelecionado);
+	}
+
 	public List<Convenio> getConvenios() {
 		return convenios;
 	}
 
+	public Convenio getConvenioSelecionado() {
+		return convenioSelecionado;
+	}
+
+	public void setConvenioSelecionado(Convenio convenioSelecionado) {
+		this.convenioSelecionado = convenioSelecionado;
+	}
+
+	public void addConvenios() {
+		this.convenios.add(convenioSelecionado);
+	}
+	
+	public void removeConvenio() {
+		this.convenios.remove(convenioSelecionado);
+	}
 }

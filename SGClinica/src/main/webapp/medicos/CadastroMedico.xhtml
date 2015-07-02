@@ -1,0 +1,74 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo Medico</ui:define>
+
+	<ui:define name="corpo">
+
+		<h1>Novo Medico</h1>
+		<h:form id="frmCadastro">
+
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/medicos/CadastroMedico" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroMedicoBean.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/medicos/PesquisaMedicos" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="4" id="painel"
+				style="width: 100%; margin-top: 20px"
+				columnClasses="rotulo, campo, rotulo, campo">
+				<p:outputLabel value="Id: " for="id" />
+				<p:inputText id="id" size="10" maxlength="20"
+					value="#{cadastroMedicoBean.medico.id}" readonly="true" />
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" sise="60" maxlength="60"
+					value="#{cadastroMedicoBean.medico.nome}" />
+				<p:outputLabel value="CRM" for="crm" />
+				<p:inputText id="crm" sise="11" maxlength="20"
+					value="#{cadastroMedicoBean.medico.crm}" />
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputMask id="cpf" sise="11" maxlength="11" mask="999.999.999-99"
+					value="#{cadastroMedicoBean.medico.cpf}" />
+				<p:outputLabel value="RG" for="rg" />
+				<p:inputText id="rg" sise="11" maxlength="11"
+					value="#{cadastroMedicoBean.medico.rg}" />
+				<p:outputLabel value="Orgão Emissor" for="orgaoEmissor" />
+				<p:inputText id="orgaoEmissor" sise="11" maxlength="11"
+					value="#{cadastroMedicoBean.medico.orgao}" />
+				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
+				<p:calendar id="dataNascimento" locale="pt" navigator="true"
+					pattern="dd/MM/yyyy"
+					value="#{cadastroMedicoBean.medico.dataNascimento}" />
+
+				<p:outputLabel value="Endereço" for="endereco" />
+				<p:inputText id="endereco" sise="70" maxlength="70"
+					value="#{cadastroMedicoBean.medico.endereco}" />
+				<p:outputLabel value="Cidade" for="cidade" />
+				<p:inputText id="cidade" sise="70" maxlength="70"
+					value="#{cadastroMedicoBean.medico.municipio}" />
+				<p:outputLabel value="Especialidade" for="especialidade" />
+				<p:inputText id="especialidade" sise="70" maxlength="70"
+					value="#{cadastroMedicoBean.medico.especialidade}" />
+			</p:panelGrid>
+
+			<p:tabView style="margin-top: 20px;">
+				<p:tab title="Telefones">
+					<ui:include src="/WEB-INF/template/medicos/TelefonesMedico.xhtml" />
+				</p:tab>
+				<p:tab title="Convenios">
+					<ui:include src="/WEB-INF/template/medicos/ConveniosMedico.xhtml" />
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	</ui:define>
+</ui:composition>
