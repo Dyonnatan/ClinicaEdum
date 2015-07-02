@@ -15,7 +15,6 @@ public class Convenio implements TabelaBD{
 	private String nomeFantasia;
 	private String cnpj;
 	private String razaoSocial;
-	//private LinkedList<String> telefones;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

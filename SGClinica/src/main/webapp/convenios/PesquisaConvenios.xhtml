@@ -8,12 +8,9 @@
 	<ui:define name="titulo">Pesquisa Convenios</ui:define>
 
 	<ui:define name="corpo">
-
-		<h:form>
-
-			<h1>Pesquisa Convenios</h1>
-
-
+		<h1>Pesquisa Convenios</h1>
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Pesquisar" />
@@ -32,24 +29,27 @@
 					mask="99.999.999.9999-99" />
 			</p:panelGrid>
 
-			<p:dataTable id="clientesTable"
-				value="#{pesquisaConveniosBean.conveniosFiltrados}" var="convenios"
+			<p:dataTable id="convenioTable"
+				value="#{pesquisaConvenioBean.convenios}" var="convenio"
 				style="margin-top: 20px" emptyMessage="Nenhum convenio encontrado."
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 
-				<p:column headerText="CNPJ" style="text-align: center; width: 100px">
-					<h:outputText value="123" />
+				<p:column headerText="Id" style="text-align: center; width: 100px">
+					<h:outputText value="#{convenio.id}" />
 				</p:column>
-				<p:column headerText="Nome">
-					<h:outputText value="Matheus" />
+				<p:column headerText="Nome Fantasia"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{convenio.nomeFantasia}" />
 				</p:column>
-				<p:column headerText="CNPJ" style="width: 250px">
-					<h:outputText value="92768826" />
+				<p:column headerText="Cnpj" style="text-align: center; width: 100px">
+					<h:outputText value="#{convenio.cnpj}" />
 				</p:column>
-				<p:column headerText="	Razão Social" style="width: 120px">
-					<h:outputText value="Unimed" />
+				<p:column headerText="Razao Social"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{convenio.razaoSocial}" />
 				</p:column>
+
 				<p:column headerText="" style="width: 100px; text-align: center">
 					<p:button icon="ui-icon-pencil" title="Editar" />
 					<p:commandButton icon="ui-icon-trash" title="Excluir" />
@@ -57,6 +57,6 @@
 
 			</p:dataTable>
 
-		</h:form>
+			</h:form>
 	</ui:define>
 </ui:composition>
