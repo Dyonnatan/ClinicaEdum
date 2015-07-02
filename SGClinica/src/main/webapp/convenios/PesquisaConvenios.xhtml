@@ -9,6 +9,7 @@
 
 	<ui:define name="corpo">
 		<h1>Pesquisa Convenios</h1>
+
 		<h:form id="frmPesquisa">
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 			<p:toolbar style="margin-top: 20px">
@@ -16,20 +17,11 @@
 					<p:commandButton value="Pesquisar" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/convenios/CadastroConvenio" />
+					<p:button value="Novo" outcome="/convenios/CadastroConvenio.xhtml" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo">
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" sise="60" />
-				<p:outputLabel value="CNPJ" for="cnpj" />
-				<p:inputMask id="cnpj" sise="14" maxlength="14"
-					mask="99.999.999.9999-99" />
-			</p:panelGrid>
-
-			<p:dataTable id="convenioTable"
+			<p:dataTable id="conveniosTable"
 				value="#{pesquisaConvenioBean.convenios}" var="convenio"
 				style="margin-top: 20px" emptyMessage="Nenhum convenio encontrado."
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
@@ -39,7 +31,7 @@
 					<h:outputText value="#{convenio.id}" />
 				</p:column>
 				<p:column headerText="Nome Fantasia"
-					style="text-align: center; width: 100px">
+					style="text-align: center; width: 100%">
 					<h:outputText value="#{convenio.nomeFantasia}" />
 				</p:column>
 				<p:column headerText="Cnpj" style="text-align: center; width: 100px">
@@ -49,14 +41,32 @@
 					style="text-align: center; width: 100px">
 					<h:outputText value="#{convenio.razaoSocial}" />
 				</p:column>
-
-				<p:column headerText="" style="width: 100px; text-align: center">
-					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				<p:column style="text-align: center; width: 100px">
+				<p:button outcome="CadastroConvenio" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="convenio" value="#{convenio.id}" />
+					</p:button>
+					
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaConvenioBean.convenioSelecionado}"
+							value="#{convenio}" />
+					</p:commandButton>
 				</p:column>
-
 			</p:dataTable>
 
-			</h:form>
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir o convenio #{pesquisaConvenioBean.convenioSelecionado.nomeFantasia}?"
+				header="Exclusão de convenio" severity="alert">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim" update=":frmPesquisa:conveniosTable"
+					onclick="confirmacaoExclusao.hide()"
+					action="#{pesquisaConvenioBean.excluir}" />
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

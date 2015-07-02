@@ -45,6 +45,10 @@ public class PesquisaConvenioBean implements Serializable{
 		return convenios;
 	}
 
+	public void setConvenios(List<Convenio> convenios) {
+		this.convenios = convenios;
+	}
+	
 	public Convenio getConvenioSelecionado() {
 		return convenioSelecionado;
 	}
