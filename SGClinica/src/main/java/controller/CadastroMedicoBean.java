@@ -74,6 +74,10 @@ public class CadastroMedicoBean implements Serializable {
 	}
 
 	public void setMedico(Medico medico) {
+		if(medico!=null){
+			convenios = medico.getConvenios();
+			telefones = medico.getTelefones();
+		}
 		this.medico = medico;
 	}
 
@@ -115,7 +119,6 @@ public class CadastroMedicoBean implements Serializable {
 	}
 
 	public void setConvenioSelecionado(Convenio convenioSelecionado) {
-
 		this.convenioSelecionado = convenioSelecionado;
 	}
 
@@ -127,8 +130,4 @@ public class CadastroMedicoBean implements Serializable {
 		this.convenios.remove(convenioSelecionado);
 	}
 
-	public void setLists() {
-		this.convenios = this.medico.getConvenios();
-		this.telefones = this.medico.getTelefones();
-	}
 }

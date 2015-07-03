@@ -18,18 +18,9 @@
 					<p:commandButton value="Pesquisar" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Nova Consulta" outcome="/agendas/CadastroConsulta"/>
+					<p:button value="Nova Consulta" outcome="/consultas/CadastroConsulta"/>
 				</p:toolbarGroup>
 			</p:toolbar>
-
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo">
-				<p:outputLabel value="Data" for="data" />
-				<p:calendar id="data" locale="pt" navigator="true"
-					pattern="dd/MM/yyyy" />
-				<p:outputLabel value="Medico" for="medico" />
-				<p:autoComplete id="medico" />
-			</p:panelGrid>
 
 			<p:dataTable id="consultasTable"
 				value="#{pesquisaAgendasBean.consultasFiltrados}" var="consultas"

@@ -12,7 +12,6 @@
 			<o:viewParam name="convenio" value="#{cadastroConvenioBean.convenio}" />
 		</f:metadata>
 
-
 		<h:form>
 
 			<h1>Novo Convenio</h1>
@@ -33,7 +32,7 @@
 				columnClasses="rotulo, campo, rotulo, campo">
 				<p:outputLabel value="Id" for="id" />
 				<p:inputText id="id" size="20" maxlength="60"
-					value="#{cadastroConvenioBean.convenio.id}" />
+					value="#{cadastroConvenioBean.convenio.id}" readonly="true"/>
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" maxlength="60"
 					value="#{cadastroConvenioBean.convenio.nomeFantasia}" />

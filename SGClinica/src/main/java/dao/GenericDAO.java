@@ -28,9 +28,7 @@ public class GenericDAO<T> implements Serializable {
 	}
 
 	public void salvar(T obj) {
-
 		manager.merge(obj);
-
 	}
 
 	@SuppressWarnings("unchecked")

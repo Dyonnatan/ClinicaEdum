@@ -2,11 +2,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui">
 
-		<f:metadata>
-			<o:viewParam name="telefone" value="#{medico.telefones}" />
-		</f:metadata>
+	
 	<h:form>
 		<p:outputLabel value="Telefone: " for="idtel" />
 		<p:inputMask mask="(99)9999-9999" id="idtel" size="10" maxlength="10" onchange="submit"

@@ -13,17 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="consultas")
 public class Consulta implements TabelaBD{
 
 	private Long id;
-	/*Para otimizar a consulta e simplificar o desenvolvimento*/
-	private String nomeCliente;
+	private Cliente cliente;
+	private Medico medico;
 	private Collection<Procedimento> procedimentos;
-	private Date horario;
+	private String status;
 	private Convenio convenio;
 	
 	@Id
@@ -36,12 +35,20 @@ public class Consulta implements TabelaBD{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Transient
-	public String getNomeCliente() {
-		return nomeCliente;
+	
+	@ManyToOne
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	@ManyToOne
+	public Medico getMedico() {
+		return medico;
+	}
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,targetEntity=Procedimento.class)   
 	@JoinColumn(name="id_consulta") 
@@ -52,12 +59,14 @@ public class Consulta implements TabelaBD{
 		this.procedimentos = procedimentos;
 	}
 	
-	public Date getHorario() {
-		return horario;
+	public String getStatus() {
+		return status;
 	}
-	public void setHorario(Date horario) {
-		this.horario = horario;
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
+	
 	@ManyToOne
 	@JoinColumn(name = "id_convenio")
 	public Convenio getConvenio() {

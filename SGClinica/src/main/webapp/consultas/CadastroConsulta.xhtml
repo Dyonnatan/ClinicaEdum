@@ -3,47 +3,63 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Nova Consulta</ui:define>
 
 	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}" />
+		</f:metadata>
 
-		<h:form>
+		<h:form id="frmCadastro">
 
 			<h1>Nova Consulta</h1>
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/agendas/CadastroConsulta" />
-					<p:commandButton value="Salvar" id="botaoSalvar" />
+					<p:button value="Novo" outcome="/consultas/CadastroConsulta" />
+					<p:commandButton value="Salvar" id="botaoSalvar" 
+					action="#{cadastroConsultaBean.salvar}" update="frmCadastro" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/agendas/Agenda" />
+					<p:button value="Pesquisa" outcome="/consultas/PesquisaConsulta" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
 			<p:panelGrid columns="4" id="painel"
 				style="width: 100%; margin-top: 20px"
 				columnClasses="rotulo, campo, rotulo, campo">
-				<p:outputLabel value="Data" for="data" />
-				<p:calendar id="data" locale="pt" navigator="true"
-					pattern="dd/MM/yyyy" readonly="true"/>
+				<p:outputLabel value="Status" for="status" />
+				<p:inputText />
 				<p:outputLabel value="Horario" for="horario" />
 				<p:calendar id="horario" pattern="HH:mm" timeOnly="true" locale="pt" />
 				<p:outputLabel value="Paciente" for="paciente" />
-				<p:autoComplete id="paciente" sise="80" maxlength="80" />
+
+				<p:selectOneMenu id="paciente" value="#{cadastroConsultaBean.clienteSel}">
+					<f:selectItem itemLabel="Selecione o paciente: " />
+					<f:selectItems value="#{cadastroConsultaBean.clientes}" var="cli"
+						itemLabel="#{cli.nome}" itemValue="#{cli}" size="20" />
+				</p:selectOneMenu>
 				<p:outputLabel value="Medico" for="medico" />
-				<p:autoComplete id="medico" sise="80" maxlength="80" />
+				<p:selectOneMenu id="medico" value="#{cadastroConsultaBean.medicoSel}">
+					<f:selectItem itemLabel="Selecione o medico: " />
+					<f:selectItems value="#{cadastroConsultaBean.medicos}" var="med"
+						itemLabel="#{med.nome}" itemValue="#{med}" size="20" />
+				</p:selectOneMenu>
 				<p:outputLabel value="Convenio" for="convenio" />
-				<p:autoComplete id="convenio" />
+				<p:selectOneMenu id="convenio" value="#{cadastroConsultaBean.convenioSel}">
+					<f:selectItem itemLabel="Selecione o convenio: " />
+					<f:selectItems value="#{cadastroConsultaBean.convenios}" var="conv"
+						itemLabel="#{conv.nomeFantasia}" itemValue="#{conv}" size="20" />
+				</p:selectOneMenu>
 			</p:panelGrid>
 
-			<p:tabView style="margin-top: 20px;">
-				<p:tab title="Procedimentos">
-					<ui:include src="/WEB-INF/template/agendas/Procedimentos.xhtml" />
-				</p:tab>
-			</p:tabView>
+			<!-- 			<p:tabView style="margin-top: 20px;"> -->
+			<!-- 				<p:tab title="Procedimentos"> -->
+			<!-- 					<ui:include src="/WEB-INF/template/agendas/Procedimentos.xhtml" /> -->
+			<!-- 				</p:tab> -->
+			<!-- 			</p:tabView> -->
 		</h:form>
 	</ui:define>
 </ui:composition>
