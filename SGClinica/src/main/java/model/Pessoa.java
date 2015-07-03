@@ -116,7 +116,7 @@ public abstract class Pessoa implements TabelaBD{
 		this.endereco = endereco;
 	}
 
-	@ElementCollection(targetClass = Long.class,fetch=FetchType.LAZY)
+	@ElementCollection(targetClass = String.class,fetch=FetchType.LAZY)
 	@CollectionTable(name="telefones",joinColumns=@JoinColumn(name="id_pessoa"))
 	@Column(name="telefone", length=15)
 	@GeneratedValue(generator="id", strategy=GenerationType.IDENTITY)

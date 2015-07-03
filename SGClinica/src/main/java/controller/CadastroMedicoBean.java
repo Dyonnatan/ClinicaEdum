@@ -10,9 +10,12 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import dao.GenericDAO;
+import model.Cliente;
 import model.Convenio;
 import model.Medico;
 import model.Sexo;
+import service.CadastroConvenioService;
 import service.CadastroMedicoService;
 import service.NegocioException;
 import util.jsf.FacesUtil;
@@ -27,21 +30,25 @@ public class CadastroMedicoBean implements Serializable {
 	private List<Sexo> sexos;
 	private List<String> telefones;
 	private List<Convenio> convenios;
+	private List<Convenio> conveniosExistente;
 	private String telefoneSelecionado;
 	private Convenio convenioSelecionado;
 
 	@Inject
 	private CadastroMedicoService cadastroMedicoService;
+	@Inject
+	private GenericDAO<Convenio> convDAO;
 
 	@PostConstruct
 	public void init() {
 		this.limpar();
+		conveniosExistente = convDAO.buscarTodos(Convenio.class);
 		sexos = Arrays.asList(Sexo.values());
+		convenios.add(new Convenio());
 	}
 
 	public void salvar() {
 		try {
-			telefones.remove(1L);
 			medico.setTelefones(telefones);
 			this.cadastroMedicoService.salvar(medico);
 			FacesUtil.addSuccessMessage("Médico salvo com sucesso!");
@@ -60,7 +67,7 @@ public class CadastroMedicoBean implements Serializable {
 	public void limpar() {
 		this.medico = new Medico();
 		telefones = new LinkedList<String>();
-
+		convenioSelecionado = new Convenio();
 		convenios = new LinkedList<Convenio>();
 	}
 
@@ -102,6 +109,10 @@ public class CadastroMedicoBean implements Serializable {
 		return convenios;
 	}
 
+	public List<Convenio> getConveniosExistente() {
+		return conveniosExistente;
+	}
+	
 	public Convenio getConvenioSelecionado() {
 		return convenioSelecionado;
 	}
@@ -110,7 +121,9 @@ public class CadastroMedicoBean implements Serializable {
 		this.convenioSelecionado = convenioSelecionado;
 	}
 
-	public void addConvenios() {
+	public void addConvenio() {
+		if(this.convenios.contains(convenioSelecionado))
+			return;
 		this.convenios.add(convenioSelecionado);
 	}
 	

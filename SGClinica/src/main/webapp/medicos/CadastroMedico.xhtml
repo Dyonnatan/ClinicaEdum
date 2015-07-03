@@ -3,11 +3,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Novo Medico</ui:define>
 
 	<ui:define name="corpo">
+		<f:metadata>
+			<o:viewParam name="medico" value="#{cadastroMedicoBean.medico}" />
+		</f:metadata>
 
 		<h1>Novo Medico</h1>
 		<h:form id="frmCadastro">
@@ -65,7 +68,7 @@
 				<p:tab title="Telefones">
 					<ui:include src="/WEB-INF/template/medicos/TelefonesMedico.xhtml" />
 				</p:tab>
-				<p:tab title="Convenios">
+				<p:tab title="Convenio">
 					<ui:include src="/WEB-INF/template/medicos/ConveniosMedico.xhtml" />
 				</p:tab>
 			</p:tabView>

@@ -5,46 +5,39 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
+		<p:selectOneMenu id="convId"
+			value="#{cadastroMedicoBean.convenioSelecionado}">
+			<f:selectItem itemLabel="Selecione o convenio: " />
+			<f:selectItems value="#{cadastroMedicoBean.conveniosExistente}"
+				var="convenioSI" itemLabel="#{convenioSI.nomeFantasia}"
+				itemValue="#{convenioSI}" size="20" />
+		</p:selectOneMenu>
 
-		<p:toolbar style="margin-top: 20px">
-			<p:toolbarGroup>
-				<p:commandButton value="Inserir" title="Inserir"
-					action="#{cadastroConvenioBean.addConvenio}" update="frmCadastro" />
-			</p:toolbarGroup>
-		</p:toolbar>
-		<p:selectOneMenu id="convenioId" value="#{cadastroMedicoBean.cliente.sexo}">
-					<f:selectItem itemLabel="Selecione o convenio: " />
-					<f:selectItems value="#{cadastroClienteBean.sexos}" var="sexo"
-						itemLabel="#{sexo}" itemValue="#{sexo}" />
-				</p:selectOneMenu>
+		<p:commandButton icon="ui-icon-plus" title="Inserir"
+			update="conveniosTable" 
+			action="#{cadastroMedicoBean.addConvenio}" />
+		
 		<p:dataTable id="conveniosTable"
 			value="#{cadastroMedicoBean.convenios}" var="convenio">
 			<p:column headerText="Nome">
-				<!-- <p:outputLabel styleClass="convenio-tabela" /> -->
 				<p:column headerText="Nome" style="text-align: center; width: 100px">
 					<h:outputText value="#{convenio.nomeFantasia}" />
 				</p:column>
 				<p:column headerText="Cnpj" style="text-align: center; width: 100px">
 					<h:outputText value="#{convenio.cnpj}" />
 				</p:column>
-				<p:column headerText="Razao Social"
-					style="text-align: center; width: 100px">
-					<h:outputText value="#{convenio.razaoSocial}" />
-				</p:column>
+				
 			</p:column>
 			<p:column headerText="" style="text-align: center">
 				<p:commandButton icon="ui-icon-trash" title="Excluir"
-					process="@this" update="tabelatelefone"
+					process="@this" update="conveniosTable"
 					action="#{cadastroMedicoBean.removeConvenio}">
 					<f:setPropertyActionListener
 						target="#{cadastroMedicoBean.convenioSelecionado}"
 						value="#{telefone}" />
 				</p:commandButton>
 			</p:column>
-			<p:columnGroup type="footer">
-				<p:row>
-				</p:row>
-			</p:columnGroup>
+			
 		</p:dataTable>
 
 	</h:form>

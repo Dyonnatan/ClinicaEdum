@@ -22,14 +22,6 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo">
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" sise="60" />
-				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputText id="cpf" sise="11" />
-			</p:panelGrid>
-
 			<p:dataTable id="medicosTable"
 				value="#{pesquisaMedicosBean.medicosFiltrados}" var="medicos"
 				style="margin-top: 20px" emptyMessage="Nenhum medico encontrado."
@@ -40,16 +32,16 @@
 					<h:outputText value="123" />
 				</p:column>
 				<p:column headerText="Nome">
-					<h:outputText value="Matheus" />
+					<h:outputText value="#{medicos.nome}" />
 				</p:column>
 				<p:column headerText="Telefone" style="width: 250px">
-					<h:outputText value="92768826" />
+										
 				</p:column>
 				<p:column headerText="	Especialidade" style="width: 120px">
-					<h:outputText value="Oftamologista" />
+					<h:outputText value="#{medicos.especiidade}" />
 				</p:column>
 				<p:column headerText="CRM" style="width: 100px">
-					<h:outputText value="1412" />
+					<h:outputText value="#{medicos.crm}" />
 				</p:column>
 				<p:column headerText="" style="width: 100px; text-align: center">
 					<p:button icon="ui-icon-pencil" title="Editar" />
