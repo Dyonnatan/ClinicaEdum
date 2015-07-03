@@ -1,23 +1,30 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="convenios")
-public class Convenio implements TabelaBD{
+@Table(name = "convenios")
+public class Convenio implements TabelaBD {
 
 	private Long id;
 	private String nomeFantasia;
 	private String cnpj;
 	private String razaoSocial;
-	
+	private List<String> telefones;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Override
 	public Long getId() {
 		return id;
@@ -28,7 +35,7 @@ public class Convenio implements TabelaBD{
 		this.id = id;
 	}
 
-	@Column(name="nome_fantasia", nullable=false, length=25)
+	@Column(name = "nome_fantasia", nullable = false, length = 25)
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
@@ -36,7 +43,8 @@ public class Convenio implements TabelaBD{
 	public void setNomeFantasia(String nomeFantasia) {
 		this.nomeFantasia = nomeFantasia;
 	}
-	@Column(name="cnpj", nullable=false, length=25)
+
+	@Column(name = "cnpj", nullable = false, length = 25)
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -44,13 +52,26 @@ public class Convenio implements TabelaBD{
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	@Column(name="razao_social", length=45)
+
+	@Column(name = "razao_social", length = 45)
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
 
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
+	}
+
+	@ElementCollection(targetClass = String.class, fetch = FetchType.LAZY)
+	@CollectionTable(name = "telefones_Convenio", joinColumns = @JoinColumn(name = "id_convenio"))
+	@Column(name = "telefone", length = 15)
+	@GeneratedValue(generator = "id", strategy = GenerationType.IDENTITY)
+	public List<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<String> telefones) {
+		this.telefones = telefones;
 	}
 
 	@Override

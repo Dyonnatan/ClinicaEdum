@@ -11,11 +11,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import dao.GenericDAO;
-import model.Cliente;
 import model.Convenio;
 import model.Medico;
 import model.Sexo;
-import service.CadastroConvenioService;
 import service.CadastroMedicoService;
 import service.NegocioException;
 import util.jsf.FacesUtil;
@@ -44,12 +42,12 @@ public class CadastroMedicoBean implements Serializable {
 		this.limpar();
 		conveniosExistente = convDAO.buscarTodos(Convenio.class);
 		sexos = Arrays.asList(Sexo.values());
-		convenios.add(new Convenio());
 	}
 
 	public void salvar() {
 		try {
 			medico.setTelefones(telefones);
+			medico.setConvenios(convenios);
 			this.cadastroMedicoService.salvar(medico);
 			FacesUtil.addSuccessMessage("Médico salvo com sucesso!");
 			this.limpar();
@@ -96,8 +94,7 @@ public class CadastroMedicoBean implements Serializable {
 	}
 
 	public void addTelefone() {
-		if(this.telefones.contains(telefoneSelecionado))
-			return;
+
 		this.telefones.add(telefoneSelecionado);
 	}
 
@@ -112,22 +109,26 @@ public class CadastroMedicoBean implements Serializable {
 	public List<Convenio> getConveniosExistente() {
 		return conveniosExistente;
 	}
-	
+
 	public Convenio getConvenioSelecionado() {
 		return convenioSelecionado;
 	}
 
 	public void setConvenioSelecionado(Convenio convenioSelecionado) {
+
 		this.convenioSelecionado = convenioSelecionado;
 	}
 
 	public void addConvenio() {
-		if(this.convenios.contains(convenioSelecionado))
-			return;
 		this.convenios.add(convenioSelecionado);
 	}
-	
+
 	public void removeConvenio() {
 		this.convenios.remove(convenioSelecionado);
+	}
+
+	public void setLists() {
+		this.convenios = this.medico.getConvenios();
+		this.telefones = this.medico.getTelefones();
 	}
 }

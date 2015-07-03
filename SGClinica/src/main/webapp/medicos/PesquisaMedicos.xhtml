@@ -9,7 +9,7 @@
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="frmPesquisa">
 
 			<h1>Pesquisa Medicos</h1>
 
@@ -22,33 +22,77 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable id="medicosTable"
-				value="#{pesquisaMedicosBean.medicosFiltrados}" var="medicos"
-				style="margin-top: 20px" emptyMessage="Nenhum medico encontrado."
-				rows="20" paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom">
+			<p:dataTable id="medicosTable" value="#{pesquisaMedicoBean.medicos}"
+				var="medico" style="margin-top: 20px"
+				emptyMessage="Nenhum medico encontrado." rows="20" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
-				<p:column headerText="CPF" style="text-align: center; width: 100px">
-					<h:outputText value="123" />
-				</p:column>
 				<p:column headerText="Nome">
-					<h:outputText value="#{medicos.nome}" />
+					<h:outputText value="#{medico.nome}" />
 				</p:column>
 				<p:column headerText="Telefone" style="width: 250px">
-										
+
+					<p:dataTable id="telefonesTable" value="#{medico.telefones}"
+						var="tel" style="margin-top: 20px" emptyMessage="Nenhum telefone."
+						rows="5" paginator="true" paginatorAlwaysVisible="false"
+						paginatorPosition="bottom">
+
+						<p:column>
+							<h:outputText value="#{tel}" />
+						</p:column>
+
+					</p:dataTable>
+
 				</p:column>
+				<p:column headerText="Convenios" style="width: 250px">
+
+					<p:dataTable id="convTable" value="#{medico.convenios}" var="con"
+						style="margin-top: 20px" emptyMessage="Nenhum convenio." rows="5"
+						paginator="true" paginatorAlwaysVisible="false"
+						paginatorPosition="bottom">
+
+						<p:column>
+							<h:outputText value="#{con.nomeFantasia}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:column>
+
 				<p:column headerText="	Especialidade" style="width: 120px">
-					<h:outputText value="#{medicos.especiidade}" />
+					<h:outputText value="#{medico.especialidade}" />
 				</p:column>
 				<p:column headerText="CRM" style="width: 100px">
-					<h:outputText value="#{medicos.crm}" />
+					<h:outputText value="#{medico.crm}" />
 				</p:column>
 				<p:column headerText="" style="width: 100px; text-align: center">
-					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+
+					<p:button outcome="CadastroMedico" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="medico" value="#{medico.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaMedicoBean.medicoSelecionado}"
+							value="#{medico}" />
+					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>
+
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir o médico #{pesquisaMedicoBean.medicoSelecionado.nome}?"
+				header="Exclusão de convenio" severity="alert">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim" update=":frmPesquisa:medicosTable"
+					onclick="confirmacaoExclusao.hide()"
+					action="#{pesquisaMedicoBean.excluir}" />
+			</p:confirmDialog>
 
 		</h:form>
 	</ui:define>

@@ -9,7 +9,7 @@
 
 	<ui:define name="corpo">
 		<f:metadata>
-			<o:viewParam name="medico" value="#{cadastroMedicoBean.medico}" />
+			<o:viewParam name="medico" value="#{cadastroMedicoBean.medico}" valueChangeListener="#{cadastroMedicoBean.setLists}"/>
 		</f:metadata>
 
 		<h1>Novo Medico</h1>

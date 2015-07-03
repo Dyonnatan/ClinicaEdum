@@ -5,21 +5,36 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
-		<p:dataTable id="telefonesTable"
-			value="#{cadastroConvenioBean.telefones}" var="telefones">
+
+
+		<p:outputLabel value="Telefone: " for="idtel" />
+		<p:inputMask mask="(99)9999-9999" id="idtel" size="10" maxlength="10"
+			onchange="submit" value="#{cadastroConvenioBean.telefoneSelecionado}" />
+
+		<p:commandButton icon="ui-icon-plus" title="Inserir"
+			process="#{idtel}" partialSubmit="true" update="tabelatelefone"
+			action="#{cadastroConvenioBean.addTelefone}" />
+
+		<p:dataTable id="tabelatelefone"
+			value="#{cadastroConvenioBean.telefones}" var="telefone">
 
 			<p:column headerText="Telefone">
-				<p:inputMask id="telefone" sise="10" maxlength="10"
-					mask="(99)9999-9999" />
+				<p:inputMask mask="(99)9999-9999" size="10" maxlength="10"
+					value="#{telefone}" readonly="true" />
 			</p:column>
+
 			<p:column headerText="" style="text-align: center">
-				<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					process="@this" update="tabelatelefone"
+					action="#{cadastroConvenioBean.removeTelefone}">
+					<f:setPropertyActionListener
+						target="#{cadastroConvenioBean.telefoneSelecionado}"
+						value="#{telefone}" />
+				</p:commandButton>
 			</p:column>
-			<p:columnGroup type="footer">
-				<p:row>
-				</p:row>
-			</p:columnGroup>
+
 		</p:dataTable>
+
 
 	</h:form>
 </ui:composition>

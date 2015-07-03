@@ -9,32 +9,27 @@
 			value="#{cadastroMedicoBean.convenioSelecionado}">
 			<f:selectItem itemLabel="Selecione o convenio: " />
 			<f:selectItems value="#{cadastroMedicoBean.conveniosExistente}"
-				var="convenioSI" itemLabel="#{convenioSI.nomeFantasia}"
-				itemValue="#{convenioSI}" size="20" />
+				var="convenio" itemLabel="#{convenio.nomeFantasia}"
+				itemValue="#{convenio}" size="20" />
+				<p:ajax update="conveniosTable" process="@this" listener="#{cadastroMedicoBean.addConvenio}"/>
 		</p:selectOneMenu>
-
-		<p:commandButton icon="ui-icon-plus" title="Inserir"
-			update="conveniosTable" 
-			action="#{cadastroMedicoBean.addConvenio}" />
 		
 		<p:dataTable id="conveniosTable"
 			value="#{cadastroMedicoBean.convenios}" var="convenio">
-			<p:column headerText="Nome">
+	
 				<p:column headerText="Nome" style="text-align: center; width: 100px">
 					<h:outputText value="#{convenio.nomeFantasia}" />
 				</p:column>
 				<p:column headerText="Cnpj" style="text-align: center; width: 100px">
 					<h:outputText value="#{convenio.cnpj}" />
 				</p:column>
-				
-			</p:column>
 			<p:column headerText="" style="text-align: center">
 				<p:commandButton icon="ui-icon-trash" title="Excluir"
 					process="@this" update="conveniosTable"
 					action="#{cadastroMedicoBean.removeConvenio}">
 					<f:setPropertyActionListener
 						target="#{cadastroMedicoBean.convenioSelecionado}"
-						value="#{telefone}" />
+						value="#{convenio}" />
 				</p:commandButton>
 			</p:column>
 			
