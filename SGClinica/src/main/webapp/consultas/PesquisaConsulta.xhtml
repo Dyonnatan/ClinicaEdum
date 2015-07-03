@@ -23,25 +23,25 @@
 			</p:toolbar>
 
 			<p:dataTable id="consultasTable"
-				value="#{pesquisaAgendasBean.consultasFiltrados}" var="consultas"
+				value="#{pesquisaConsultaBean.consultas}" var="consulta"
 				style="margin-top: 20px" emptyMessage="Nenhuma consulta encontrado."
 				rows="20" paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom">
 
-				<p:column headerText="Data" style="text-align: center; width: 100px">
-					<h:outputText value="11/12/2015" />
+<p:column headerText="Id" style="text-align: center; width: 100px">
+					<h:outputText value="#{consulta.id}" />
 				</p:column>
-				<p:column headerText="Horário">
-					<h:outputText value="20:00" />
+				<p:column headerText="Status" style="text-align: center; width: 100px">
+					<h:outputText value="#{consulta.status}" />
 				</p:column>
 				<p:column headerText="Convenio">
-					<h:outputText value="Unimed" />
+					<h:outputText value="#{consulta.convenio}" />
 				</p:column>
 				<p:column headerText="Paciente">
-					<h:outputText value="Matheus" />
+					<h:outputText value="#{consulta.cliente.nome}" />
 				</p:column>
 				<p:column headerText="Medico">
-					<h:outputText value="Dr. João" />
+					<h:outputText value="#{consulta.medico.nome}" />
 				</p:column>
 				<p:column headerText="" style="width: 100px; text-align: center">
 					<p:button icon="ui-icon-pencil" title="Editar" />

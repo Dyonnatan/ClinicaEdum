@@ -3,6 +3,7 @@ package controller;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Stack;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -59,7 +60,8 @@ public class CadastroConsultaBean implements Serializable {
 			consulta.setMedico(medicoSel);
 			consulta.setProcedimentos(procedimentos);
 			this.cadastroConsultaService.salvar(consulta);
-			FacesUtil.addSuccessMessage("Médico salvo com sucesso!");
+			limpar();
+			FacesUtil.addSuccessMessage("Consulta salva com sucesso!");
 			this.limpar();
 		} catch (NegocioException e) {
 			FacesUtil.addErrorMessage(e.getMessage());
@@ -75,8 +77,10 @@ public class CadastroConsultaBean implements Serializable {
 	public void limpar() {
 		this.consulta = new Consulta();
 		convenioSel = new Convenio();
+		procedimentoSel = new Procedimento();
 		medicoSel = new Medico();
 		clienteSel = new Cliente();
+		procedimentos = new Stack<Procedimento>();
 	}
 
 	public Medico getMedicoSel() {
@@ -137,6 +141,15 @@ public class CadastroConsultaBean implements Serializable {
 
 	public void setProcedimentoSel(Procedimento procedimentoSel) {
 		this.procedimentoSel = procedimentoSel;
+	}
+
+	public void addProcedimento() {
+		((Stack) this.procedimentos).push(procedimentoSel);
+		procedimentoSel = new Procedimento();
+	}
+
+	public void removeProcedimento() {
+		((Stack) this.procedimentos).pop();
 	}
 
 }

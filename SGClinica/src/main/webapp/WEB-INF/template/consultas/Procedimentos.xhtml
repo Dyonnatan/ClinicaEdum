@@ -5,18 +5,27 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
-		<p:dataTable id="procedimentosTable"
-			value="#{cadastroConsultaBean.procedimentos}" var="procedimentos">
+		<p:outputLabel value="Procedimentos: " for="proc" />
+		<p:inputText id="proc" size="50" maxlength="120" onchange="submit"
+			value="#{cadastroConsultaBean.procedimentoSel.informacoes}" />
+
+		<p:commandButton icon="ui-icon-plus" title="Inserir" process="#{proc}"
+			partialSubmit="true" update="tabelaproc"
+			action="#{cadastroConsultaBean.addProcedimento}" />
+			
+		<p:commandButton icon="ui-icon-trash" title="Excluir" process="@this"
+			update="tabelaproc"
+			action="#{cadastroConsultaBean.removeProcedimento}">
+		</p:commandButton>
+		
+		<p:dataTable id="tabelaproc"
+			value="#{cadastroConsultaBean.procedimentos}" var="pro">
+
 			<p:column headerText="Procedimento">
-				<p:autoComplete />
+				<p:inputText size="50" maxlength="120" value="#{pro.informacoes}"
+					readonly="true" />
 			</p:column>
-			<p:column headerText="" style="text-align: center">
-				<p:commandButton icon="ui-icon-trash" title="Excluir" />
-			</p:column>
-			<p:columnGroup type="footer">
-				<p:row>
-				</p:row>
-			</p:columnGroup>
+
 		</p:dataTable>
 
 	</h:form>
