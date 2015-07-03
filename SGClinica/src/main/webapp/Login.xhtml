@@ -21,13 +21,13 @@
 		<h:form id="frm">
 			<h:panelGrid columns="2" styleClass="grid-login">
 				<p:outputLabel value="E-mail" />
-				<p:inputText sise="30" />
+				<p:inputText size="30" value="admin"/>
 
 				<p:outputLabel value="Senha" />
-				<p:password sise="30" />
+				<p:password size="30" value="admin"/>
 
 				<h:panelGroup />
-				<p:commandButton value="Login" />
+				<p:button value="Login" outcome="/Home"/>
 
 			</h:panelGrid>
 		</h:form>

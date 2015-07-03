@@ -65,9 +65,20 @@
 				<p:inputText id="endereco" size="20" maxlength="70"
 					value="#{cadastroClienteBean.cliente.endereco}" />
 				<p:outputLabel value="Limite " for="limite" />
-				<p:inputText id="limite" sise="20" maxlength="15"
-					value="#{cadastroClienteBean.cliente.limite}" />
+				<p:inputText id="limite" sise="20" maxlength="15" styleClass="moeda"
+					value="#{cadastroClienteBean.cliente.limite}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+				</p:inputText>
 			</p:panelGrid>
+
+			<p:tabView style="margin-top: 20px;">
+				<p:tab title="Telefones">
+					<ui:include src="/WEB-INF/template/clientes/TelefonesCliente.xhtml" />
+				</p:tab>
+				<p:tab title="Convenio">
+					<ui:include src="/WEB-INF/template/clientes/ConveniosCliente.xhtml" />
+				</p:tab>
+			</p:tabView>
 		</h:form>
 	</ui:define>
 </ui:composition>

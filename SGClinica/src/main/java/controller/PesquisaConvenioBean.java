@@ -36,7 +36,7 @@ public class PesquisaConvenioBean implements Serializable{
 			convenios.remove(convenioSelecionado);
 			FacesUtil.addSuccessMessage("Excluiu o modelo");
 		} catch (NegocioException e) {
-			FacesUtil.addErrorMessage(e.getMessage());
+			FacesUtil.addErrorMessage("Este convênio está referenciado, primeiro desfaça-o. "+e.getMessage());
 		}
 
 	}

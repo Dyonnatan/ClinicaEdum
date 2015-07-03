@@ -5,18 +5,35 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
+		<p:selectOneMenu id="convId"
+			value="#{cadastroClienteBean.convenioSelecionado}">
+			<f:selectItem itemLabel="Selecione o convenio: " />
+			<f:selectItems value="#{cadastroClienteBean.conveniosExistente}"
+				var="convenio" itemLabel="#{convenio.nomeFantasia}"
+				itemValue="#{convenio}" size="20" />
+			<p:ajax update="conveniosTable" process="@this"
+				listener="#{cadastroClienteBean.addConvenio}" />
+		</p:selectOneMenu>
+
 		<p:dataTable id="conveniosTable"
-			value="#{cadastroClienteBean.convenios}" var="convenios">
-			<p:column headerText="Convenio">
-				<p:autoComplete styleClass="convenio-tabela" />
+			value="#{cadastroClienteBean.convenios}" var="convenio">
+
+			<p:column headerText="Nome" style="text-align: center; width: 100px">
+				<h:outputText value="#{convenio.nomeFantasia}" />
+			</p:column>
+			<p:column headerText="Cnpj" style="text-align: center; width: 100px">
+				<h:outputText value="#{convenio.cnpj}" />
 			</p:column>
 			<p:column headerText="" style="text-align: center">
-				<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					process="@this" update="conveniosTable"
+					action="#{cadastroClienteBean.removeConvenio}">
+					<f:setPropertyActionListener
+						target="#{cadastroClienteBean.convenioSelecionado}"
+						value="#{convenio}" />
+				</p:commandButton>
 			</p:column>
-			<p:columnGroup type="footer">
-				<p:row>
-				</p:row>
-			</p:columnGroup>
+
 		</p:dataTable>
 
 	</h:form>

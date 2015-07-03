@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
@@ -32,9 +34,9 @@ public class Medico extends Pessoa {
 		this.crm = crm;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL ,fetch = FetchType.LAZY)
 	@JoinTable(name = "medico_convenio", joinColumns = @JoinColumn(name = "id_medico"), inverseJoinColumns = @JoinColumn(name = "id_convenio"))
-	@ForeignKey(name = "fk_med_id", inverseName = "fk_conv_id")
+	@ForeignKey(name = "fk_med_id", inverseName = "fk_conv_id") 
 	public List<Convenio> getConvenios() {
 		return convenios;
 	}
